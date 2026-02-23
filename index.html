@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalender Ramadhan Amil IZI 1447 H</title>
     
-    <!-- Google Fonts: Plus Jakarta Sans for modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -62,41 +59,46 @@
 </head>
 <body class="bg-izi-light font-sans text-izi-dark antialiased selection:bg-izi-green selection:text-white">
 
-    <!-- HEADER / HERO -->
-    <header class="bg-izi-green relative overflow-hidden shadow-xl">
-        <!-- Decorative Background Elements -->
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, #4D4D4D 1px, transparent 0); background-size: 24px 24px;"></div>
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-white opacity-20 rounded-full blur-3xl mix-blend-overlay"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-izi-dark opacity-10 rounded-full blur-2xl"></div>
+    <header class="bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] relative overflow-hidden shadow-2xl">
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, #FFFFFF 1px, transparent 0); background-size: 32px 32px;"></div>
+        <i class="fa-solid fa-moon absolute -top-12 -right-12 text-[18rem] text-white opacity-10 transform -rotate-12"></i>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-izi-green opacity-20 rounded-full blur-3xl mix-blend-screen"></div>
 
-        <div class="max-w-6xl mx-auto px-4 py-12 relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="text-center md:text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-sm font-semibold mb-4 border border-white/30">
-                    <i class="fa-solid fa-moon"></i> Ramadhan 1447 H
+        <div class="max-w-6xl mx-auto px-4 py-12 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="text-center md:text-left flex-1">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-white text-sm font-semibold mb-6 border border-white/20 shadow-lg">
+                    <i class="fa-solid fa-star-and-crescent text-izi-green"></i> Ramadhan 1447 H
                 </div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-sm mb-2">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-md mb-4">
                     Ramadhan Produktif
                 </h1>
-                <p class="text-lg md:text-xl font-bold text-izi-dark flex items-center justify-center md:justify-start gap-2">
-                    <i class="fa-solid fa-bullseye text-white"></i> Kalender Inspirasi Amil IZI
+                <p class="text-lg md:text-xl font-medium text-gray-300 flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-bullseye text-izi-green"></i> Kalender Inspirasi Amil IZI
                 </p>
             </div>
             
-            <div class="bg-white rounded-2xl p-5 border border-white/40 shadow-lg text-center transform hover:scale-105 transition duration-300">
-                <p class="text-xs text-izi-gray uppercase tracking-widest font-bold mb-1">Hari Ini</p>
-                <p id="header-date" class="font-extrabold text-xl text-izi-dark">Memuat...</p>
+            <div class="bg-white/10 backdrop-blur-lg rounded-[2rem] p-6 border border-white/20 shadow-2xl text-center transform hover:scale-105 transition duration-300 w-full md:w-auto min-w-[280px]">
+                <p id="header-ramadhan-day" class="text-izi-green font-black text-3xl mb-1 drop-shadow-sm">Hari ke-...</p>
+                <p id="header-date" class="font-medium text-gray-200 text-base mb-6">Memuat tanggal...</p>
+                
+                <div class="bg-gradient-to-br from-izi-green to-[#6c9c2e] rounded-xl p-4 shadow-inner relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
+                    <div class="relative z-10">
+                        <p class="text-[10px] text-white/90 uppercase tracking-widest font-bold mb-1 flex items-center justify-center gap-1">
+                            <i class="fa-regular fa-clock"></i> Buka Puasa Dalam
+                        </p>
+                        <p id="maghrib-countdown" class="font-black text-3xl text-white tracking-wider drop-shadow-md">--:--:--</p>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-10 space-y-12">
         
-        <!-- HIGHLIGHT CARD (Quote & Imsakiyah) -->
         <section class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col lg:flex-row transform transition-all duration-500 hover:shadow-izi-green/20">
             
-            <!-- Left side: Quote -->
             <div class="lg:w-[60%] p-8 md:p-12 relative overflow-hidden flex flex-col justify-center">
-                <!-- Watermark Icon -->
                 <i class="fa-solid fa-quote-left absolute -top-10 -left-6 text-[12rem] text-izi-green opacity-5 transform -rotate-12"></i>
                 
                 <div class="flex flex-wrap items-center gap-3 mb-8 relative z-10">
@@ -130,9 +132,7 @@
                 </div>
             </div>
 
-            <!-- Right side: Imsakiyah -->
             <div class="lg:w-[40%] bg-izi-dark text-white p-8 md:p-12 relative overflow-hidden flex flex-col justify-center">
-                <!-- Decorative pattern for dark side -->
                 <div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
                 <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-izi-green opacity-20 rounded-full blur-3xl"></div>
                 
@@ -140,40 +140,34 @@
                     <h3 class="text-2xl font-extrabold mb-2 text-izi-green flex items-center gap-3">
                         <i class="fa-solid fa-mosque"></i> Jadwal Imsakiyah
                     </h3>
-                    <p class="text-sm text-izi-gray mb-8 font-medium">*Estimasi DKI Jakarta & Sekitarnya</p>
+                    <p class="text-sm text-gray-400 mb-8 font-medium">Estimasi DKI Jakarta & Sekitarnya</p>
                     
                     <div class="grid grid-cols-2 gap-4">
-                        <!-- Imsak -->
                         <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
                             <i class="fa-solid fa-utensils text-izi-green mb-2 text-xl"></i>
                             <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Imsak</p>
                             <p id="time-imsak" class="text-xl font-extrabold tracking-tight">--:--</p>
                         </div>
-                        <!-- Subuh -->
                         <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
                             <i class="fa-solid fa-cloud-sun text-izi-green mb-2 text-xl"></i>
                             <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Subuh</p>
                             <p id="time-subuh" class="text-xl font-extrabold tracking-tight">--:--</p>
                         </div>
-                        <!-- Dzuhur -->
                         <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
                             <i class="fa-solid fa-sun text-izi-green mb-2 text-xl"></i>
                             <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Dzuhur</p>
                             <p id="time-dzuhur" class="text-xl font-extrabold tracking-tight">--:--</p>
                         </div>
-                        <!-- Ashar -->
                         <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
                             <i class="fa-solid fa-cloud text-izi-green mb-2 text-xl"></i>
                             <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Ashar</p>
                             <p id="time-ashar" class="text-xl font-extrabold tracking-tight">--:--</p>
                         </div>
-                        <!-- Maghrib -->
                         <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300 ring-2 ring-izi-green/50 bg-izi-green/10">
                             <i class="fa-solid fa-mug-hot text-white mb-2 text-xl"></i>
                             <p class="text-xs text-gray-200 font-bold mb-1 uppercase tracking-wider">Maghrib</p>
                             <p id="time-maghrib" class="text-2xl font-black text-izi-green tracking-tight">--:--</p>
                         </div>
-                        <!-- Isya -->
                         <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
                             <i class="fa-solid fa-moon text-izi-green mb-2 text-xl"></i>
                             <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Isya</p>
@@ -185,32 +179,27 @@
             
         </section>
 
-        <!-- CALENDAR GRID -->
         <section>
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                 <div>
                     <h3 class="text-2xl md:text-3xl font-extrabold text-izi-dark flex items-center gap-2">
                         <i class="fa-solid fa-route text-izi-green"></i> Perjalanan 30 Hari
                     </h3>
-                    <p class="text-izi-gray font-medium mt-1">Pilih hari untuk melihat motivasi harianmu</p>
+                    <p class="text-izi-gray font-medium mt-1">Pilih hari untuk melihat motivasi harian kita bersama</p>
                 </div>
             </div>
             
             <div id="calendar-grid" class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-10 gap-3 md:gap-4">
-                <!-- Buttons will be injected here by JS -->
-            </div>
+                </div>
         </section>
 
-        <!-- IKLAN KAJIAN PEKANAN -->
         <section class="mt-8">
             <div class="bg-gradient-to-br from-izi-dark via-[#3d3d3d] to-izi-dark rounded-[2rem] shadow-2xl overflow-hidden relative border border-gray-700">
-                <!-- Background decorations -->
                 <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
                 <div class="absolute -top-32 -left-32 w-64 h-64 bg-izi-green opacity-30 rounded-full blur-3xl"></div>
                 <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-izi-green opacity-20 rounded-full blur-3xl"></div>
                 
                 <div class="relative z-10 flex flex-col md:flex-row items-center p-8 md:p-12 gap-8">
-                    <!-- Icon Area -->
                     <div class="w-full md:w-1/3 flex justify-center">
                         <div class="relative">
                             <div class="w-32 h-32 md:w-40 md:h-40 bg-izi-green/20 rounded-full animate-pulse-slow absolute inset-0"></div>
@@ -223,7 +212,6 @@
                         </div>
                     </div>
 
-                    <!-- Content Area -->
                     <div class="w-full md:w-2/3 text-center md:text-left text-white">
                         <span class="inline-block bg-izi-green text-white text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wider">
                             Internal Amil IZI
@@ -232,7 +220,7 @@
                             Kajian Ramadhan <span class="text-izi-green">Pekanan</span>
                         </h3>
                         <p class="text-gray-300 text-lg mb-6 leading-relaxed">
-                            Segarkan ruhiyah, perkuat ukhuwah. Hadiri kajian spesial online eksklusif untuk seluruh Amil IZI se-Indonesia.
+                            Segarkan ruhiyah, perkuat ukhuwah. Hadiri kajian spesial online eksklusif untuk kita semua, seluruh Amil IZI se-Indonesia.
                         </p>
                         
                         <div class="flex flex-col sm:flex-row gap-4 mb-8">
@@ -263,17 +251,15 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-izi-dark text-izi-gray py-10 text-center text-sm border-t-4 border-izi-green mt-12">
         <div class="max-w-4xl mx-auto px-4">
             <i class="fa-solid fa-hand-holding-heart text-3xl text-izi-green mb-4"></i>
             <p class="font-bold text-white text-base">Inisiatif Zakat Indonesia (IZI)</p>
             <p class="mt-2 text-gray-400">Dibuat khusus untuk memotivasi Pahlawan Kebaikan (Amil) di seluruh Indonesia.</p>
-            <p class="mt-4 pt-4 border-t border-gray-600">© 2026 Ramadhan Produktif - Jaga Ruhiyah, Capai Target!</p>
+            <p class="mt-4 pt-4 border-t border-gray-600">© 2026 Ramadhan Produktif - Jaga Ruhiyah, Capai Target Luar Biasa!</p>
         </div>
     </footer>
 
-    <!-- SCRIPT DATA & LOGIC -->
     <script>
         // Data 30 Hari Ramadhan (Estimasi 19 Feb - 20 Mar 2026)
         const ramadanData = [
@@ -310,9 +296,13 @@
         ];
 
         let activeDay = 1;
+        let countdownInterval;
 
         // Elements
         const headerDateEl = document.getElementById('header-date');
+        const headerRamadhanDayEl = document.getElementById('header-ramadhan-day');
+        const maghribCountdownEl = document.getElementById('maghrib-countdown');
+        
         const badgeDayEl = document.getElementById('badge-day');
         const badgeDateEl = document.getElementById('badge-date');
         const quoteTextEl = document.getElementById('quote-text');
@@ -329,22 +319,52 @@
         const isyaEl = document.getElementById('time-isya');
 
         function init() {
-            // Set Today's Date in Header
             const today = new Date();
             const optionsFull = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
             headerDateEl.textContent = today.toLocaleDateString('id-ID', optionsFull);
 
-            // Find current day in data
             const optionsShort = { day: '2-digit', month: 'short', year: 'numeric' };
             const formattedToday = today.toLocaleDateString('id-ID', optionsShort).replace(/ /g, ' '); 
             
             const foundDay = ramadanData.find(d => d.date === formattedToday);
+            
             if (foundDay) {
                 activeDay = foundDay.day;
+                headerRamadhanDayEl.textContent = `Hari ke-${foundDay.day} Ramadhan`;
+                startMaghribCountdown(foundDay.maghrib);
+            } else {
+                headerRamadhanDayEl.textContent = `Menjelang Ramadhan`;
+                maghribCountdownEl.innerHTML = `--:--:--`;
             }
 
             renderGrid();
             renderHighlight(activeDay);
+        }
+
+        function startMaghribCountdown(maghribTimeStr) {
+            if (countdownInterval) clearInterval(countdownInterval);
+            
+            const [hours, minutes] = maghribTimeStr.split(':').map(Number);
+
+            countdownInterval = setInterval(() => {
+                const now = new Date();
+                
+                let maghribDate = new Date();
+                maghribDate.setHours(hours, minutes, 0, 0);
+
+                let diff = maghribDate - now;
+
+                if (diff > 0) {
+                    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const s = Math.floor((diff % (1000 * 60)) / 1000);
+                    
+                    maghribCountdownEl.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                } else {
+                    maghribCountdownEl.innerHTML = `<span class="text-xl">Waktu Berbuka!</span>`;
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
         }
 
         function renderHighlight(dayNumber) {
@@ -353,7 +373,7 @@
 
             // Trigger Animation
             quoteContainer.classList.remove('animate-fade-in-up');
-            void quoteContainer.offsetWidth; // trigger reflow
+            void quoteContainer.offsetWidth; 
             quoteContainer.classList.add('animate-fade-in-up');
 
             // Update Texts
@@ -372,7 +392,7 @@
         }
 
         function renderGrid() {
-            gridContainer.innerHTML = ''; // Clear existing
+            gridContainer.innerHTML = ''; 
             
             ramadanData.forEach(data => {
                 const btn = document.createElement('button');
@@ -384,7 +404,6 @@
                     : 'bg-white text-izi-gray border border-gray-200 shadow-sm hover:shadow-md hover:border-izi-green/50 hover:text-izi-dark hover:-translate-y-1'
                 }`;
                 
-                // Add decorative background for active state
                 if(isActive) {
                     const dec = document.createElement('div');
                     dec.className = "absolute top-0 right-0 w-12 h-12 bg-white opacity-20 rounded-bl-full";
@@ -402,10 +421,9 @@
                 btn.appendChild(label);
                 btn.appendChild(number);
 
-                // Click event
                 btn.onclick = () => {
                     activeDay = data.day;
-                    renderGrid(); // Re-render grid to update active classes
+                    renderGrid(); 
                     renderHighlight(activeDay);
                 };
 
@@ -413,7 +431,6 @@
             });
         }
 
-        // Initialize on load
         window.onload = init;
     </script>
 </body>
