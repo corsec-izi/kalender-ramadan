@@ -43,7 +43,7 @@
         }
     </script>
     <style>
-        /* Custom Scrollbar for better modern feel */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #F5F5F5; }
         ::-webkit-scrollbar-thumb { background: #8CC63F; border-radius: 4px; }
@@ -140,7 +140,7 @@
                     <h3 class="text-2xl font-extrabold mb-2 text-izi-green flex items-center gap-3">
                         <i class="fa-solid fa-mosque"></i> Jadwal Imsakiyah
                     </h3>
-                    <p class="text-sm text-gray-400 mb-8 font-medium">Estimasi DKI Jakarta & Sekitarnya</p>
+                    <p id="location-notes" class="text-sm text-gray-400 mb-8 font-medium">Estimasi Waktu Standar</p>
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
@@ -176,7 +176,6 @@
                     </div>
                 </div>
             </div>
-            
         </section>
 
         <section>
@@ -248,7 +247,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer class="bg-izi-dark text-izi-gray py-10 text-center text-sm border-t-4 border-izi-green mt-12">
@@ -261,7 +259,6 @@
     </footer>
 
     <script>
-        // Data 30 Hari Ramadhan (Estimasi 19 Feb - 20 Mar 2026)
         const ramadanData = [
             { day: 1, date: "19 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:05", ashar: "15:15", maghrib: "18:15", isya: "19:25", quote: "Niatkan setiap aktivitasmu. Niat yang benar menjadikan rutinitas pekerjaan biasa bernilai ibadah di sisi Allah. (Imam An-Nawawi)", context: "Awali Ramadhan ini dengan meluruskan niat. Setiap sapaan ke donatur, pendataan mustahik, hingga ketelitian mengurus administrasi operasional adalah murni jalan jihadmu." },
             { day: 2, date: "20 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:05", ashar: "15:14", maghrib: "18:15", isya: "19:24", quote: "Kebutuhan umat (mustahik) kepadamu adalah nikmat Allah bagimu, maka janganlah engkau bosan memenuhinya. (Husain bin Ali)", context: "Saat lelah merekap laporan, melayani keluhan, atau mengantarkan bantuan ke pelosok, ingatlah bahwa IZI adalah jembatan harapan dhuafa. Teruslah layani dengan senyum terbaik." },
@@ -297,8 +294,9 @@
 
         let activeDay = 1;
         let countdownInterval;
+        let isLocationFetched = false; 
+        let localTimingsToday = null;  
 
-        // Elements
         const headerDateEl = document.getElementById('header-date');
         const headerRamadhanDayEl = document.getElementById('header-ramadhan-day');
         const maghribCountdownEl = document.getElementById('maghrib-countdown');
@@ -310,13 +308,13 @@
         const quoteContainer = document.getElementById('quote-container');
         const gridContainer = document.getElementById('calendar-grid');
 
-        // Waktu Sholat Elements
         const imsakEl = document.getElementById('time-imsak');
         const subuhEl = document.getElementById('time-subuh');
         const dzuhurEl = document.getElementById('time-dzuhur');
         const asharEl = document.getElementById('time-ashar');
         const maghribEl = document.getElementById('time-maghrib');
         const isyaEl = document.getElementById('time-isya');
+        const locationNotes = document.getElementById('location-notes');
 
         function init() {
             const today = new Date();
@@ -331,24 +329,90 @@
             if (foundDay) {
                 activeDay = foundDay.day;
                 headerRamadhanDayEl.textContent = `Hari ke-${foundDay.day} Ramadhan`;
-                startMaghribCountdown(foundDay.maghrib);
+                
+                renderGrid();
+                renderHighlight(activeDay);
+                
+                // Panggil API Lokasi
+                fetchLocalPrayerTimes(today, foundDay.maghrib);
             } else {
                 headerRamadhanDayEl.textContent = `Menjelang Ramadhan`;
                 maghribCountdownEl.innerHTML = `--:--:--`;
+                renderGrid();
             }
+        }
 
-            renderGrid();
-            renderHighlight(activeDay);
+        function fetchLocalPrayerTimes(dateObj, defaultMaghrib) {
+            if (navigator.geolocation && !isLocationFetched) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        
+                        const dd = String(dateObj.getDate()).padStart(2, '0');
+                        const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+                        const yyyy = dateObj.getFullYear();
+                        const dateString = `${dd}-${mm}-${yyyy}`;
+
+                        // Method 11 adalah standar Majelis Ulama Indonesia
+                        const apiUrl = `https://api.aladhan.com/v1/timings/${dateString}?latitude=${lat}&longitude=${lng}&method=11`;
+
+                        fetch(apiUrl)
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.code === 200) {
+                                    isLocationFetched = true;
+                                    localTimingsToday = data.data.timings;
+                                    
+                                    if(locationNotes) {
+                                        locationNotes.innerHTML = `<i class="fa-solid fa-location-dot"></i> Waktu Lokal: ${data.data.meta.timezone}`;
+                                        locationNotes.classList.remove('text-gray-400');
+                                        locationNotes.classList.add('text-izi-green');
+                                    }
+
+                                    updateDisplayIfToday();
+                                    startMaghribCountdown(localTimingsToday.Maghrib);
+                                }
+                            })
+                            .catch(err => {
+                                console.error("Gagal sinkronisasi API:", err);
+                                startMaghribCountdown(defaultMaghrib);
+                            });
+                    },
+                    (error) => {
+                        console.log("Akses lokasi ditolak, menggunakan jadwal statis.");
+                        startMaghribCountdown(defaultMaghrib);
+                    }
+                );
+            } else {
+                startMaghribCountdown(defaultMaghrib);
+            }
+        }
+
+        function updateDisplayIfToday() {
+            const today = new Date();
+            const optionsShort = { day: '2-digit', month: 'short', year: 'numeric' };
+            const formattedToday = today.toLocaleDateString('id-ID', optionsShort).replace(/ /g, ' '); 
+            const foundDay = ramadanData.find(d => d.date === formattedToday);
+
+            if (foundDay && activeDay === foundDay.day && localTimingsToday) {
+                imsakEl.textContent = localTimingsToday.Imsak;
+                subuhEl.textContent = localTimingsToday.Fajr;
+                dzuhurEl.textContent = localTimingsToday.Dhuhr;
+                asharEl.textContent = localTimingsToday.Asr;
+                maghribEl.textContent = localTimingsToday.Maghrib;
+                isyaEl.textContent = localTimingsToday.Isha;
+            }
         }
 
         function startMaghribCountdown(maghribTimeStr) {
             if (countdownInterval) clearInterval(countdownInterval);
             
-            const [hours, minutes] = maghribTimeStr.split(':').map(Number);
+            const cleanTimeStr = maghribTimeStr.split(' ')[0]; 
+            const [hours, minutes] = cleanTimeStr.split(':').map(Number);
 
             countdownInterval = setInterval(() => {
                 const now = new Date();
-                
                 let maghribDate = new Date();
                 maghribDate.setHours(hours, minutes, 0, 0);
 
@@ -371,24 +435,23 @@
             const data = ramadanData.find(d => d.day === dayNumber);
             if(!data) return;
 
-            // Trigger Animation
             quoteContainer.classList.remove('animate-fade-in-up');
             void quoteContainer.offsetWidth; 
             quoteContainer.classList.add('animate-fade-in-up');
 
-            // Update Texts
             badgeDayEl.innerHTML = `<i class="fa-regular fa-calendar-check"></i> Hari ke-${data.day}`;
             badgeDateEl.innerHTML = `<i class="fa-regular fa-clock"></i> ${data.date}`;
             quoteTextEl.textContent = `"${data.quote}"`;
             quoteContextEl.textContent = data.context;
 
-            // Update Times
             imsakEl.textContent = data.imsak;
             subuhEl.textContent = data.subuh;
             dzuhurEl.textContent = data.dzuhur;
             asharEl.textContent = data.ashar;
             maghribEl.textContent = data.maghrib;
             isyaEl.textContent = data.isya;
+
+            updateDisplayIfToday();
         }
 
         function renderGrid() {
