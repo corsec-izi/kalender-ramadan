@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender Ramadhan Amil IZI 1447 H</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans for modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        izi: {
+                            green: '#8CC63F',
+                            dark: '#4D4D4D',
+                            gray: '#808080',
+                            light: '#F5F5F5',
+                            white: '#FFFFFF'
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(15px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar for better modern feel */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F5F5F5; }
+        ::-webkit-scrollbar-thumb { background: #8CC63F; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #7ab036; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-izi-light font-sans text-izi-dark antialiased selection:bg-izi-green selection:text-white">
+
+    <!-- HEADER / HERO -->
+    <header class="bg-izi-green relative overflow-hidden shadow-xl">
+        <!-- Decorative Background Elements -->
+        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, #4D4D4D 1px, transparent 0); background-size: 24px 24px;"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-white opacity-20 rounded-full blur-3xl mix-blend-overlay"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-izi-dark opacity-10 rounded-full blur-2xl"></div>
+
+        <div class="max-w-6xl mx-auto px-4 py-12 relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-sm font-semibold mb-4 border border-white/30">
+                    <i class="fa-solid fa-moon"></i> Ramadhan 1447 H
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-sm mb-2">
+                    Ramadhan Produktif
+                </h1>
+                <p class="text-lg md:text-xl font-bold text-izi-dark flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-bullseye text-white"></i> Kalender Inspirasi Amil IZI
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-5 border border-white/40 shadow-lg text-center transform hover:scale-105 transition duration-300">
+                <p class="text-xs text-izi-gray uppercase tracking-widest font-bold mb-1">Hari Ini</p>
+                <p id="header-date" class="font-extrabold text-xl text-izi-dark">Memuat...</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10 space-y-12">
+        
+        <!-- HIGHLIGHT CARD (Quote & Imsakiyah) -->
+        <section class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col lg:flex-row transform transition-all duration-500 hover:shadow-izi-green/20">
+            
+            <!-- Left side: Quote -->
+            <div class="lg:w-[60%] p-8 md:p-12 relative overflow-hidden flex flex-col justify-center">
+                <!-- Watermark Icon -->
+                <i class="fa-solid fa-quote-left absolute -top-10 -left-6 text-[12rem] text-izi-green opacity-5 transform -rotate-12"></i>
+                
+                <div class="flex flex-wrap items-center gap-3 mb-8 relative z-10">
+                    <span id="badge-day" class="bg-izi-green text-white text-sm font-bold px-5 py-2 rounded-full shadow-md flex items-center gap-2">
+                        <i class="fa-regular fa-calendar-check"></i> Hari ke-1
+                    </span>
+                    <span id="badge-date" class="text-izi-gray font-bold text-sm flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full">
+                        <i class="fa-regular fa-clock"></i> 19 Feb 2026
+                    </span>
+                </div>
+                
+                <div id="quote-container" class="relative z-10">
+                    <h2 id="quote-text" class="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-izi-dark italic">
+                        "Memuat kutipan..."
+                    </h2>
+                    
+                    <div class="mt-6 pt-6 border-t-2 border-izi-green/20 relative">
+                        <div class="absolute -top-3 left-4 bg-white px-2 text-izi-green/40">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <p id="quote-context" class="text-lg text-izi-gray font-medium leading-relaxed">
+                            Memuat konteks...
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-10 flex flex-wrap gap-3 text-sm font-bold text-izi-dark relative z-10">
+                    <div class="flex items-center gap-2 bg-izi-light px-4 py-2 rounded-lg border border-gray-200"><i class="fa-solid fa-check-circle text-izi-green"></i> Target Tercapai</div>
+                    <div class="flex items-center gap-2 bg-izi-light px-4 py-2 rounded-lg border border-gray-200"><i class="fa-solid fa-heart-pulse text-izi-green"></i> Ruhiyah Sehat</div>
+                    <div class="flex items-center gap-2 bg-izi-light px-4 py-2 rounded-lg border border-gray-200"><i class="fa-solid fa-bolt text-izi-green"></i> Performa Prima</div>
+                </div>
+            </div>
+
+            <!-- Right side: Imsakiyah -->
+            <div class="lg:w-[40%] bg-izi-dark text-white p-8 md:p-12 relative overflow-hidden flex flex-col justify-center">
+                <!-- Decorative pattern for dark side -->
+                <div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
+                <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-izi-green opacity-20 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-extrabold mb-2 text-izi-green flex items-center gap-3">
+                        <i class="fa-solid fa-mosque"></i> Jadwal Imsakiyah
+                    </h3>
+                    <p class="text-sm text-izi-gray mb-8 font-medium">*Estimasi DKI Jakarta & Sekitarnya</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Imsak -->
+                        <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
+                            <i class="fa-solid fa-utensils text-izi-green mb-2 text-xl"></i>
+                            <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Imsak</p>
+                            <p id="time-imsak" class="text-xl font-extrabold tracking-tight">--:--</p>
+                        </div>
+                        <!-- Subuh -->
+                        <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
+                            <i class="fa-solid fa-cloud-sun text-izi-green mb-2 text-xl"></i>
+                            <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Subuh</p>
+                            <p id="time-subuh" class="text-xl font-extrabold tracking-tight">--:--</p>
+                        </div>
+                        <!-- Dzuhur -->
+                        <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
+                            <i class="fa-solid fa-sun text-izi-green mb-2 text-xl"></i>
+                            <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Dzuhur</p>
+                            <p id="time-dzuhur" class="text-xl font-extrabold tracking-tight">--:--</p>
+                        </div>
+                        <!-- Ashar -->
+                        <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
+                            <i class="fa-solid fa-cloud text-izi-green mb-2 text-xl"></i>
+                            <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Ashar</p>
+                            <p id="time-ashar" class="text-xl font-extrabold tracking-tight">--:--</p>
+                        </div>
+                        <!-- Maghrib -->
+                        <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300 ring-2 ring-izi-green/50 bg-izi-green/10">
+                            <i class="fa-solid fa-mug-hot text-white mb-2 text-xl"></i>
+                            <p class="text-xs text-gray-200 font-bold mb-1 uppercase tracking-wider">Maghrib</p>
+                            <p id="time-maghrib" class="text-2xl font-black text-izi-green tracking-tight">--:--</p>
+                        </div>
+                        <!-- Isya -->
+                        <div class="glass-panel rounded-2xl p-4 flex flex-col items-center justify-center text-center transform hover:-translate-y-1 transition duration-300">
+                            <i class="fa-solid fa-moon text-izi-green mb-2 text-xl"></i>
+                            <p class="text-xs text-gray-300 font-semibold mb-1 uppercase tracking-wider">Isya</p>
+                            <p id="time-isya" class="text-xl font-extrabold tracking-tight">--:--</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- CALENDAR GRID -->
+        <section>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-extrabold text-izi-dark flex items-center gap-2">
+                        <i class="fa-solid fa-route text-izi-green"></i> Perjalanan 30 Hari
+                    </h3>
+                    <p class="text-izi-gray font-medium mt-1">Pilih hari untuk melihat motivasi harianmu</p>
+                </div>
+            </div>
+            
+            <div id="calendar-grid" class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-10 gap-3 md:gap-4">
+                <!-- Buttons will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- IKLAN KAJIAN PEKANAN -->
+        <section class="mt-8">
+            <div class="bg-gradient-to-br from-izi-dark via-[#3d3d3d] to-izi-dark rounded-[2rem] shadow-2xl overflow-hidden relative border border-gray-700">
+                <!-- Background decorations -->
+                <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                <div class="absolute -top-32 -left-32 w-64 h-64 bg-izi-green opacity-30 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-izi-green opacity-20 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col md:flex-row items-center p-8 md:p-12 gap-8">
+                    <!-- Icon Area -->
+                    <div class="w-full md:w-1/3 flex justify-center">
+                        <div class="relative">
+                            <div class="w-32 h-32 md:w-40 md:h-40 bg-izi-green/20 rounded-full animate-pulse-slow absolute inset-0"></div>
+                            <div class="w-32 h-32 md:w-40 md:h-40 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center relative z-10 shadow-xl">
+                                <i class="fa-solid fa-laptop-code text-5xl md:text-6xl text-izi-green"></i>
+                            </div>
+                            <div class="absolute -bottom-2 -right-2 bg-blue-500 text-white p-3 rounded-full shadow-lg z-20">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Area -->
+                    <div class="w-full md:w-2/3 text-center md:text-left text-white">
+                        <span class="inline-block bg-izi-green text-white text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-wider">
+                            Internal Amil IZI
+                        </span>
+                        <h3 class="text-3xl md:text-4xl font-black mb-3 text-white leading-tight">
+                            Kajian Ramadhan <span class="text-izi-green">Pekanan</span>
+                        </h3>
+                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+                            Segarkan ruhiyah, perkuat ukhuwah. Hadiri kajian spesial online eksklusif untuk seluruh Amil IZI se-Indonesia.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                            <div class="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-xl border border-white/10 backdrop-blur-sm">
+                                <i class="fa-regular fa-calendar-days text-izi-green text-xl"></i>
+                                <div class="text-left">
+                                    <p class="text-xs text-gray-400 font-bold uppercase">Setiap Ahad</p>
+                                    <p class="font-bold">Selama Ramadhan</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white/10 px-4 py-3 rounded-xl border border-white/10 backdrop-blur-sm">
+                                <i class="fa-regular fa-clock text-izi-green text-xl"></i>
+                                <div class="text-left">
+                                    <p class="text-xs text-gray-400 font-bold uppercase">Ba'da Subuh</p>
+                                    <p class="font-bold">05.20 - 06.20 WIB</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full sm:w-auto bg-izi-green hover:bg-[#7ab036] text-white font-bold py-4 px-8 rounded-xl shadow-[0_0_20px_rgba(140,198,63,0.4)] transform hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-3 group">
+                            <i class="fa-solid fa-link group-hover:rotate-12 transition"></i> 
+                            Link Zoom akan dikirim ke Grup BDI IZI
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-izi-dark text-izi-gray py-10 text-center text-sm border-t-4 border-izi-green mt-12">
+        <div class="max-w-4xl mx-auto px-4">
+            <i class="fa-solid fa-hand-holding-heart text-3xl text-izi-green mb-4"></i>
+            <p class="font-bold text-white text-base">Inisiatif Zakat Indonesia (IZI)</p>
+            <p class="mt-2 text-gray-400">Dibuat khusus untuk memotivasi Pahlawan Kebaikan (Amil) di seluruh Indonesia.</p>
+            <p class="mt-4 pt-4 border-t border-gray-600">© 2026 Ramadhan Produktif - Jaga Ruhiyah, Capai Target!</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DATA & LOGIC -->
+    <script>
+        // Data 30 Hari Ramadhan (Estimasi 19 Feb - 20 Mar 2026)
+        const ramadanData = [
+            { day: 1, date: "19 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:05", ashar: "15:15", maghrib: "18:15", isya: "19:25", quote: "Niatkan setiap aktivitasmu. Niat yang benar menjadikan rutinitas pekerjaan biasa bernilai ibadah di sisi Allah. (Imam An-Nawawi)", context: "Awali Ramadhan ini dengan meluruskan niat. Setiap sapaan ke donatur, pendataan mustahik, hingga ketelitian mengurus administrasi operasional adalah murni jalan jihadmu." },
+            { day: 2, date: "20 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:05", ashar: "15:14", maghrib: "18:15", isya: "19:24", quote: "Kebutuhan umat (mustahik) kepadamu adalah nikmat Allah bagimu, maka janganlah engkau bosan memenuhinya. (Husain bin Ali)", context: "Saat lelah merekap laporan, melayani keluhan, atau mengantarkan bantuan ke pelosok, ingatlah bahwa IZI adalah jembatan harapan dhuafa. Teruslah layani dengan senyum terbaik." },
+            { day: 3, date: "21 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:05", ashar: "15:13", maghrib: "18:15", isya: "19:24", quote: "Waktu itu seperti pedang. Jika engkau tidak memanfaatkannya untuk kebaikan, maka ia akan memotongmu. (Imam Asy-Syafi'i)", context: "Jangan tunda follow-up donatur, eksekusi penyaluran bantuan, dan penyelesaian laporan tepat waktu. Manajemen waktu yang baik di setiap divisi adalah kunci sukses IZI." },
+            { day: 4, date: "22 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:05", ashar: "15:13", maghrib: "18:14", isya: "19:24", quote: "Barangsiapa yang memperbaiki hubungannya dengan Allah, niscaya Allah akan memudahkan urusannya dengan sesama manusia. (Sufyan bin Uyainah)", context: "Jaga ruhiyahmu dengan tilawah dan sholat tepat waktu. Insya Allah, prospek penghimpunan, kelancaran distribusi, dan akurasi operasional akan dimudahkan-Nya." },
+            { day: 5, date: "23 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:05", ashar: "15:12", maghrib: "18:14", isya: "19:23", quote: "Ketahuilah bahwa sabar, jika dipandang dalam perjuangan seseorang, adalah ibarat kepala dari suatu tubuh. (Ali bin Abi Thalib)", context: "Hadapi penolakan presentasi ZISWAF, kendala cuaca saat distribusi, atau rumitnya sinkronisasi data dengan dada lapang. Kesabaran hari ini adalah kunci pencapaian esok hari." },
+            { day: 6, date: "24 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:05", ashar: "15:11", maghrib: "18:14", isya: "19:23", quote: "Dunia ini hanya tiga hari: Kemarin yang telah pergi, esok yang belum pasti, dan hari ini tempatmu beramal. (Hasan Al-Basri)", context: "Maksimalkan momentum Ramadhan ini. Jangan tunggu besok untuk edukasi donatur atau pengantaran hak mustahik yang sejatinya bisa diselesaikan hari ini." },
+            { day: 7, date: "25 Feb 2026", imsak: "04:30", subuh: "04:40", dzuhur: "12:04", ashar: "15:10", maghrib: "18:13", isya: "19:23", quote: "Puncak dari kedermawanan adalah mengutamakan orang lain saat dirimu sendiri sedang dalam kepenatan dan kelelahan. (Ibnu Taimiyah)", context: "Tetaplah prima di meja layanan, di belakang layar sistem, atau berjibaku di lapangan meski sedang berpuasa. Dedikasimu mengawal program adalah kedermawanan sejati." },
+            { day: 8, date: "26 Feb 2026", imsak: "04:29", subuh: "04:39", dzuhur: "12:04", ashar: "15:10", maghrib: "18:13", isya: "19:22", quote: "Jika engkau melihat seseorang mengunggulimu dalam urusan dunia, maka unggulilah dia dalam urusan akhirat. (Hasan Al-Basri)", context: "Berlomba-lombalah dalam kebaikan demi mencapai target penghimpunan dan kualitas distribusi terbaik. Jadikan semangat itu sebagai pemberat timbangan akhiratmu." },
+            { day: 9, date: "27 Feb 2026", imsak: "04:29", subuh: "04:39", dzuhur: "12:04", ashar: "15:09", maghrib: "18:13", isya: "19:22", quote: "Orang yang paling ikhlas adalah dia yang menyembunyikan kebaikannya dalam beramal sebagaimana ia menyembunyikan aibnya. (Ya'qub Al-Makfuf)", context: "Biarkan kualitas program IZI yang berbicara. Ikhlaslah bekerja, terutama bagi tim operasional dan back-office yang kontribusinya tak selalu terlihat di panggung depan." },
+            { day: 10, date: "28 Feb 2026", imsak: "04:29", subuh: "04:39", dzuhur: "12:04", ashar: "15:08", maghrib: "18:12", isya: "19:21", quote: "Tidak ada simpanan yang lebih berguna daripada ilmu, dan tidak ada sesuatu yang lebih beruntung daripada adab yang baik. (Ali bin Abi Thalib)", context: "Bekali dirimu dengan fiqih zakat dan pemahaman SOP yang mumpuni. Amil beradab dan berilmu akan lebih profesional dalam menghimpun maupun menyalurkan dana umat." },
+            { day: 11, date: "01 Mar 2026", imsak: "04:29", subuh: "04:39", dzuhur: "12:04", ashar: "15:07", maghrib: "18:12", isya: "19:21", quote: "Amal yang paling dicintai Allah adalah amal yang terus-menerus dan konsisten, walaupun itu sedikit. (Hasan Al-Basri)", context: "Istiqamahlah menelpon database muzakki, menyeleksi kelayakan mustahik, atau merapikan data keuangan setiap hari. Disiplin yang konsisten akan membuahkan karya besar." },
+            { day: 12, date: "02 Mar 2026", imsak: "04:29", subuh: "04:39", dzuhur: "12:03", ashar: "15:07", maghrib: "18:12", isya: "19:21", quote: "Janganlah engkau bersedih atas penolakan, jadikan kesedihan itu pelecut untuk bekerja lebih keras di masa depan. (Umar bin Khattab)", context: "Jika instansi belum bersedia bermitra atau proses distribusi mengalami kendala tak terduga, jangan patah semangat. Evaluasi strategi bersama tim dan cobalah kembali." },
+            { day: 13, date: "03 Mar 2026", imsak: "04:29", subuh: "04:39", dzuhur: "12:03", ashar: "15:08", maghrib: "18:11", isya: "19:20", quote: "Rezeki yang paling berkah adalah yang diraih dengan kejujuran dan menentramkan hati, bukan sekadar jumlahnya. (Imam Al-Ghazali)", context: "Pastikan setiap rupiah yang dihimpun dan disalurkan IZI dicatat serta dilaporkan dengan presisi. Keberkahan lembaga ini bertumpu pada integritas seluruh Amilnya." },
+            { day: 14, date: "04 Mar 2026", imsak: "04:29", subuh: "04:39", dzuhur: "12:03", ashar: "15:08", maghrib: "18:11", isya: "19:20", quote: "Ilmu itu bukan seberapa banyak yang dihafal, tetapi seberapa besar manfaat yang bisa diberikan untuk umat. (Imam Asy-Syafi'i)", context: "Terapkan keahlianmu semaksimal mungkin, baik di divisi penghimpunan, distribusi, maupun support. Manfaat kerjamu akan langsung dirasakan oleh dhuafa binaan IZI." },
+            { day: 15, date: "05 Mar 2026", imsak: "04:29", subuh: "04:39", dzuhur: "12:03", ashar: "15:09", maghrib: "18:10", isya: "19:19", quote: "Beramallah untuk duniamu seakan engkau hidup selamanya, dan untuk akhiratmu seakan engkau mati besok. (Abdullah bin Amr)", context: "Kejarlah KPI lembaga dengan profesionalisme tingkat tinggi. Namun di pertengahan Ramadhan ini, pastikan hak ibadah mahdhah pribadimu tak tergerus oleh kesibukan kerja." },
+            { day: 16, date: "06 Mar 2026", imsak: "04:28", subuh: "04:38", dzuhur: "12:02", ashar: "15:09", maghrib: "18:10", isya: "19:19", quote: "Doa adalah senjata orang mukmin. Jangan pernah bertempur mencari rezeki dan target tanpa bekal doa. (Ali bin Abi Thalib)", context: "Di sepertiga malam, selipkan doa agar hati para donatur tergerak berzakat, dan seluruh proses penyaluran program IZI berjalan aman tanpa hambatan di lapangan." },
+            { day: 17, date: "07 Mar 2026", imsak: "04:28", subuh: "04:38", dzuhur: "12:02", ashar: "15:09", maghrib: "18:10", isya: "19:18", quote: "Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia lainnya. Jadilah amil yang senantiasa menebar manfaat. (Hadits)", context: "Berikan kemudahan layanan donasi bagi muzakki, dan salurkan bantuan dengan cara yang paling memuliakan serta menjaga kehormatan para mustahik." },
+            { day: 18, date: "08 Mar 2026", imsak: "04:28", subuh: "04:38", dzuhur: "12:02", ashar: "15:10", maghrib: "18:09", isya: "19:18", quote: "Kelelahan dalam ketaatan akan hilang, sedangkan pahalanya akan kekal. Istirahatlah sejenak, lalu lanjutkan perjuangan. (Ibnu Qayyim)", context: "Wajar jika fisik terkuras mengurus event Ramadhan, menyebarkan proposal, atau mendistribusikan paket berbuka. Letihmu akan menjadi saksi indah di akhirat kelak." },
+            { day: 19, date: "09 Mar 2026", imsak: "04:28", subuh: "04:38", dzuhur: "12:02", ashar: "15:10", maghrib: "18:09", isya: "19:17", quote: "Lakukanlah kebaikan sekecil apapun, karena kau tidak pernah tahu kebaikan mana yang akan mengantarkanmu ke surga. (Hasan Al-Basri)", context: "Jangan remehkan donasi bernominal kecil, atau urusan administratif yang seolah remeh di kantor. Gabungan dedikasi itulah yang memastikan roda lembaga terus berputar." },
+            { day: 20, date: "10 Mar 2026", imsak: "04:28", subuh: "04:38", dzuhur: "12:01", ashar: "15:10", maghrib: "18:08", isya: "19:17", quote: "Tidak ada kebahagiaan sejati di dunia ini kecuali bagi mereka yang menghabiskan waktunya dalam ketaatan. (Ibnu Qayyim)", context: "Memasuki 10 hari terakhir, ritme kerja dari pagi hingga malam makin padat. Jadikan qiyamul lail sebagai sumber energimu mengejar target pencapaian lembaga." },
+            { day: 21, date: "11 Mar 2026", imsak: "04:28", subuh: "04:38", dzuhur: "12:01", ashar: "15:11", maghrib: "18:08", isya: "19:16", quote: "Barangsiapa bersungguh-sungguh berjalan pada jalannya, maka pasti ia akan sampai pada tujuan (target)-nya. (Pepatah Arab)", context: "Fokus pada KPI; baik itu nominal penghimpunan, ketepatan sasaran distribusi, maupun zero-error di operasional. Ikhtiar utuh tidak akan mengkhianati hasil akhir." },
+            { day: 22, date: "12 Mar 2026", imsak: "04:27", subuh: "04:37", dzuhur: "12:01", ashar: "15:11", maghrib: "18:08", isya: "19:16", quote: "Janganlah engkau tertipu dengan pencapaian dan pujian, karena hakikatnya Allah-lah yang memudahkan urusanmu. (Hasan Al-Basri)", context: "Saat target harian tembus di atas ekspektasi atau eksekusi program sukses besar, tetaplah menunduk tawadhu. Semua itu murni taufik dari Allah, bukan sekadar kehebatan kita." },
+            { day: 23, date: "13 Mar 2026", imsak: "04:27", subuh: "04:37", dzuhur: "12:01", ashar: "15:11", maghrib: "18:07", isya: "19:15", quote: "Barangsiapa yang memelihara amanah umat dengan baik, Allah akan memelihara urusan dunia dan akhiratnya. (Ulama Salaf)", context: "Jaga kerahasiaan data donatur, pastikan penyaluran tepat kriteria, dan rawat aset lembaga dengan apik. Profesionalitas lintas divisi akan menjaga marwah IZI." },
+            { day: 24, date: "14 Mar 2026", imsak: "04:27", subuh: "04:37", dzuhur: "12:00", ashar: "15:11", maghrib: "18:07", isya: "19:15", quote: "Taqwa adalah fondasi. Tanpa taqwa, keahlian kerjamu tidak akan membawa keberkahan sejati. (Imam Al-Ghazali)", context: "Secanggih apapun strategi marketing, rapinya SOP operasional, dan sigapnya tim lapangan, taqwa adalah intinya. Dekati Sang Pemilik rezeki agar urusan kita dipermudah." },
+            { day: 25, date: "15 Mar 2026", imsak: "04:27", subuh: "04:37", dzuhur: "12:00", ashar: "15:11", maghrib: "18:06", isya: "19:14", quote: "Siapa yang menasihatimu dalam diam, ia benar mencintaimu. Terimalah evaluasi saudaramu dengan hati lapang. (Imam Asy-Syafi'i)", context: "Jika alur koordinasi antar tim mengalami hambatan dan mendapat evaluasi, terimalah dengan baik. Kolaborasi IZI yang solid berawal dari rasa saling melengkapi." },
+            { day: 26, date: "16 Mar 2026", imsak: "04:27", subuh: "04:37", dzuhur: "12:00", ashar: "15:12", maghrib: "18:06", isya: "19:14", quote: "Kemiskinan dan kesulitan umat akan terus ada jika orang baik hanya berdiam diri. Teruslah bergerak menebar zakat! (Ali bin Abi Thalib)", context: "Jadikan potret kesusahan mustahik sebagai pemantik semangatmu. Kerja kerasmu di penghimpunan, distribusi, maupun operasional adalah upaya nyata membebaskan mereka." },
+            { day: 27, date: "17 Mar 2026", imsak: "04:27", subuh: "04:37", dzuhur: "11:59", ashar: "15:12", maghrib: "18:05", isya: "19:13", quote: "Bukanlah kekayaan itu dengan banyaknya harta, tetapi kekayaan yang hakiki adalah kekayaan jiwa yang pandai bersyukur. (Hadits)", context: "Syukuri takdirmu dipilih menjadi Amil. Kebahagiaan sejati kita di IZI, entah kau bertugas di frontliner atau back-office, adalah melihat senyum lapang dari mereka yang terbantu." },
+            { day: 28, date: "18 Mar 2026", imsak: "04:26", subuh: "04:36", dzuhur: "11:59", ashar: "15:12", maghrib: "18:05", isya: "19:13", quote: "Menyampaikan edukasi zakat adalah ibadah. Mencari jalan keluar bagi mustahik adalah jihad. Tetaplah luruskan niat. (Imam Al-Ghazali)", context: "Abaikan rasa penat dan persepsi miring di luar sana. Engkau sedang menegakkan rukun Islam dan menopang ekonomi umat, berbanggalah menjadi keluarga besar IZI!" },
+            { day: 29, date: "19 Mar 2026", imsak: "04:26", subuh: "04:36", dzuhur: "11:59", ashar: "15:12", maghrib: "18:05", isya: "19:13", quote: "Apa yang ada di sisi kita akan lenyap, apa yang di sisi Allah kekal. Ajaklah umat berinvestasi untuk kekekalan. (Hasan Al-Basri)", context: "Di penghujung bulan, pastikan penerimaan Zakat Fitrah terekap sempurna dan distribusinya rampung sebelum sholat Ied. Lakukan pengabdian terbaikmu hingga detik terakhir." },
+            { day: 30, date: "20 Mar 2026", imsak: "04:26", subuh: "04:36", dzuhur: "11:58", ashar: "15:12", maghrib: "18:04", isya: "19:12", quote: "Istiqamah adalah karomah yang paling besar. Pertahankan semangat dan keikhlasan Ramadhan ini di bulan-bulan berikutnya. (Ibnu Taimiyah)", context: "Ramadhan di depan mata akan usai, namun ikhtiar mengentaskan kemiskinan bersama IZI masih panjang. Pertahankan ritme emas dan spirit kolaborasi ini hingga Ramadhan berikutnya!" }
+        ];
+
+        let activeDay = 1;
+
+        // Elements
+        const headerDateEl = document.getElementById('header-date');
+        const badgeDayEl = document.getElementById('badge-day');
+        const badgeDateEl = document.getElementById('badge-date');
+        const quoteTextEl = document.getElementById('quote-text');
+        const quoteContextEl = document.getElementById('quote-context');
+        const quoteContainer = document.getElementById('quote-container');
+        const gridContainer = document.getElementById('calendar-grid');
+
+        // Waktu Sholat Elements
+        const imsakEl = document.getElementById('time-imsak');
+        const subuhEl = document.getElementById('time-subuh');
+        const dzuhurEl = document.getElementById('time-dzuhur');
+        const asharEl = document.getElementById('time-ashar');
+        const maghribEl = document.getElementById('time-maghrib');
+        const isyaEl = document.getElementById('time-isya');
+
+        function init() {
+            // Set Today's Date in Header
+            const today = new Date();
+            const optionsFull = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            headerDateEl.textContent = today.toLocaleDateString('id-ID', optionsFull);
+
+            // Find current day in data
+            const optionsShort = { day: '2-digit', month: 'short', year: 'numeric' };
+            const formattedToday = today.toLocaleDateString('id-ID', optionsShort).replace(/ /g, ' '); 
+            
+            const foundDay = ramadanData.find(d => d.date === formattedToday);
+            if (foundDay) {
+                activeDay = foundDay.day;
+            }
+
+            renderGrid();
+            renderHighlight(activeDay);
+        }
+
+        function renderHighlight(dayNumber) {
+            const data = ramadanData.find(d => d.day === dayNumber);
+            if(!data) return;
+
+            // Trigger Animation
+            quoteContainer.classList.remove('animate-fade-in-up');
+            void quoteContainer.offsetWidth; // trigger reflow
+            quoteContainer.classList.add('animate-fade-in-up');
+
+            // Update Texts
+            badgeDayEl.innerHTML = `<i class="fa-regular fa-calendar-check"></i> Hari ke-${data.day}`;
+            badgeDateEl.innerHTML = `<i class="fa-regular fa-clock"></i> ${data.date}`;
+            quoteTextEl.textContent = `"${data.quote}"`;
+            quoteContextEl.textContent = data.context;
+
+            // Update Times
+            imsakEl.textContent = data.imsak;
+            subuhEl.textContent = data.subuh;
+            dzuhurEl.textContent = data.dzuhur;
+            asharEl.textContent = data.ashar;
+            maghribEl.textContent = data.maghrib;
+            isyaEl.textContent = data.isya;
+        }
+
+        function renderGrid() {
+            gridContainer.innerHTML = ''; // Clear existing
+            
+            ramadanData.forEach(data => {
+                const btn = document.createElement('button');
+                const isActive = data.day === activeDay;
+                
+                btn.className = `relative p-4 rounded-2xl flex flex-col items-center justify-center transition-all duration-300 group overflow-hidden ${
+                    isActive 
+                    ? 'bg-izi-green text-white shadow-lg shadow-izi-green/40 transform scale-105 ring-2 ring-offset-2 ring-offset-izi-light ring-izi-green' 
+                    : 'bg-white text-izi-gray border border-gray-200 shadow-sm hover:shadow-md hover:border-izi-green/50 hover:text-izi-dark hover:-translate-y-1'
+                }`;
+                
+                // Add decorative background for active state
+                if(isActive) {
+                    const dec = document.createElement('div');
+                    dec.className = "absolute top-0 right-0 w-12 h-12 bg-white opacity-20 rounded-bl-full";
+                    btn.appendChild(dec);
+                }
+
+                const label = document.createElement('span');
+                label.className = `text-xs font-bold mb-1 uppercase tracking-wider ${isActive ? 'text-white/80' : 'text-gray-400 group-hover:text-izi-green'}`;
+                label.textContent = "Hari";
+
+                const number = document.createElement('span');
+                number.className = `text-3xl font-black ${isActive ? 'text-white' : 'text-izi-dark'}`;
+                number.textContent = data.day;
+
+                btn.appendChild(label);
+                btn.appendChild(number);
+
+                // Click event
+                btn.onclick = () => {
+                    activeDay = data.day;
+                    renderGrid(); // Re-render grid to update active classes
+                    renderHighlight(activeDay);
+                };
+
+                gridContainer.appendChild(btn);
+            });
+        }
+
+        // Initialize on load
+        window.onload = init;
+    </script>
+</body>
+</html>
